@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alimosho FC
 
-## Getting Started
+A responsive recreation of https://alimoshosc.wixsite.com/alimoshofc using Next.js, Tailwind CSS, shadcn-style Radix UI components, Redux Toolkit, Zod, and Sonner.
 
-First, run the development server:
+## Run
 
-```bash
-npm run dev
-# or
+```sh
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Build with `yarn build` (or `yarn next build --webpack` if the environment blocks Turbopack worker ports).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `components/sections/`: header, hero, news, fixtures, about, contact, and footer, each in its own folder.
+- `components/ui/`: shadcn-compatible Button, Input, and Textarea; configured in `components.json`.
+- `lib/store/`: per-provider Redux store for the mobile menu, session enquiry, shopping bag and practice predictions.
+- `lib/validation.ts`: Zod enquiry schema.
+- `public/fonts/`: original Anton, Avenir, and DIN fonts.
+- `public/images/`: recovered original Wix assets.
 
-## Learn More
+## Scope
 
-To learn more about Next.js, take a look at the following resources:
+All club navigation is local: About, Goalfunda, Members, Youth Team, Predict & Win, Club Store, Tours, Blog, Soccer Schools, School Sports, Schedule, and Contact. There are 15 local article summaries. Navigation uses readable local routes such as `/goalfunda`, `/youth-team`, and `/club-store`. Some original Wix photos returned HTTP 403; affected cards and the about section reuse available club photographs. The fixtures reproduce the source's historical listing rather than a live feed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The contact form is an added preview feature. It validates fields, reports errors through inline messages and Sonner, and stores the latest valid enquiry in Redux for the current session. The user can then open an addressed email containing the enquiry. There is no server delivery, database storage, or background email sending.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The store supports sizes, quantities and removal, then prepares an order enquiry by email. Prices are historical and must be confirmed. Archived prediction matches support session-only practice scores; no live prize contest is offered. Blog search and category filters operate on local article summaries. No club navigation leaves the app.
